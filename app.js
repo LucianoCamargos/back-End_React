@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
-// Minhas rotas
+// ***** Minhas rotas ***** //
 app.use('/', indexRouter);
 app.use('/enderecos', enderecoRouter);
 app.use('/login', loginRouter);
