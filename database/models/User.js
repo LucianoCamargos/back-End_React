@@ -1,39 +1,28 @@
-module.exports = (sequelize, DataTypes) => {
-   const User = sequelize.define(
-      "User",
-      {
+const Sequelize = require('sequelize');
+const database = require('../../database/models');
+
+   const User = database.define("users", {
          id: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             autoIncrement: true,
-            primaryKey: true,
+            allowNull: false,
+            primaryKey: true
          },
          uname: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING(150),
+            allowNull: false
          },
          email: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING(150),
+            allowNull: false
          },
          upassword: {
-            type: DataTypes.STRING,
-         },
-         history: {
-            type: DataTypes.VIRTUAL,
-            get() {
-               return `http://localhost:3000/users/${this.id}/login_history`;
-            },
+            type: Sequelize.STRING(12),
+            allowNull: false
          },
       },
       {
          tableName: "users",
          timestamps: false,
-      }
-   );
-
-   User.associate = function (models) {
-      User.hasMany(models.LoginHistory, {
-         as: "login_history",
-         foreignKey: "user_id",
-      });
-   };
-   return User;
-};
+   });
+module.exports = User;
